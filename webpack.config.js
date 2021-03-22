@@ -1,5 +1,6 @@
 const path = require('path') // como roda dentro do nodejs e o node conhece o require, usamos ele
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -16,19 +17,28 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'public')
+    contentBase: path.resolve(__dirname, 'public'),
+    hot: true
   },
   plugins: [
+    isDevelopment && new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html')
     })
-  ],
+  ].filter(Boolean),
   module: {
     rules: [
       {
         test: /\.jsx$/, // expressão regular que verifica se o arquivo é terminado .jsx
         exclude: /node_modules/, // excluo todos os arquivos que estao na pasta node_modules
-        use: 'babel-loader' // faz a integração entre o Babel e o Webpack
+        use: {
+          loader: 'babel-loader', // faz a integração entre o Babel e o Webpack
+          options: {
+            plugins: [
+              isDevelopment && require.resolve('react-refresh/babel')
+            ].filter(Boolean)
+          }
+        }
       },
       {
         test: /\.scss$/,
