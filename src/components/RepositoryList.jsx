@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { RepositoryItem } from './RepositoryItem'
 import '../styles/repositories.scss'
 
@@ -8,6 +9,19 @@ const repository = {
 }
 
 export function RepositoryList() {
+  const [repositories, setRepositories] = useState([])
+
+  //useEffect = server para disparar uma função quando algo acontecer na app, ex: a variável mudou
+  useEffect(() => {
+    fetch('https://api.github.com/users/farnetani/repos')
+      .then((response) => response.json())
+      .then((data) => setRepositories(data))
+    // .then((data) => console.log(data))
+  }, []) // se passarmos o array vazio, ela irá executar somente quando o componete é carregado
+
+  console.log(repositories)
+  // Não podemos deixar sem o ultimo parametro = entra em loop infinito
+
   return (
     <section className="repository-list">
       <h1>Lista de repositórios</h1>
