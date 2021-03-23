@@ -19,17 +19,19 @@ export function RepositoryList() {
     // .then((data) => console.log(data))
   }, []) // se passarmos o array vazio, ela irá executar somente quando o componete é carregado
 
-  console.log(repositories)
+  // console.log(repositories)
   // Não podemos deixar sem o ultimo parametro = entra em loop infinito
 
   return (
     <section className="repository-list">
       <h1>Lista de repositórios</h1>
       <ul>
-        <RepositoryItem repository={repository} />
-        <RepositoryItem repository={repository} />
-        <RepositoryItem repository={repository} />
-        <RepositoryItem repository={repository} />
+        {/* Sempre que fizermos um MAP temos que definir uma key */}
+        {repositories.map((repository) => {
+          return (
+            <RepositoryItem key={repository.name} repository={repository} />
+          )
+        })}
       </ul>
     </section>
   )
