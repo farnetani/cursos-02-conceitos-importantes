@@ -6,22 +6,25 @@
           "dom.iterable",
           "esnext"
       ],
-      "allowJs": true,
-      "skipLibCheck": true,
-      "strict": true, // por default = false, mas é legal deixar como true para ele reclamar mais
-      "forceConsistentCasingInFileNames": true,
+      "allowJs": true, // tanto javascript como typescript
+      // "jsx": "preserve"
+      "jsx": "react-jsx", // podemos usar o .jsx
       "noEmit": true,
-      "esModuleInterop": true,
       "module": "esnext",
+      "strict": true, // por default = false, mas é legal deixar como true para ele reclamar mais
       "moduleResolution": "node",
       "resolveJsonModule": true,
       "isolatedModules": true,
-      "jsx": "preserve"
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
   },
-  "include": [
-      "**/*.ts",
-      "**/*.tsx"
-  ],
+  "include": ["src"],
+  // "include": [
+  //     "**/*.ts",
+  //     "**/*.tsx"
+  // ],
   "exclude": [
       "node_modules"
   ]

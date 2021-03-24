@@ -8,13 +8,13 @@ module.exports = {
   // mode: 'development', //production // none // feito com parametro no package.json
   mode: isDevelopment ? 'development' : 'production',
   devtool: isDevelopment ? 'eval-source-map' : 'source-map',
-  entry: path.resolve(__dirname, 'src', 'index.jsx'), // linux: 'src/index.jsx', windows: `src\\index.jsx`
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
@@ -29,7 +29,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx$/, // expressão regular que verifica se o arquivo é terminado .jsx
+        test: /\.(j|t)sx$/, // expressão regular que verifica se o arquivo é terminado .jsx
         exclude: /node_modules/, // excluo todos os arquivos que estao na pasta node_modules
         use: {
           loader: 'babel-loader', // faz a integração entre o Babel e o Webpack
